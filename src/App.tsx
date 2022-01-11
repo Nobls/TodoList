@@ -19,8 +19,12 @@ function App(props: any) {
     }
 
     const addTask = (title:string) => {
-      let newTask = {id: v1(), title: title, isDone: true}
+      let newTask = {id: v1(), title: title.trim(), isDone: true}
         setTasks([newTask, ...tasks])
+    }
+
+    const changeStatus = (idCheckBox:string, isDoneCheckBox:boolean) => {
+      setTasks(tasks.map(m=>m.id === idCheckBox ? {...m, isDone: isDoneCheckBox}:m))
     }
 
     const [filter, setFilter] = useState<filterType>('All')
@@ -47,8 +51,9 @@ function App(props: any) {
                 removeTask={removeTask}
                 addTask={addTask}
                 filterTasks={filterTasks}
+                changeStatus={changeStatus}
+                filter={filter}
             />
-
         </div>
     );
 }
