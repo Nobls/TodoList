@@ -1,4 +1,5 @@
 import React, {ChangeEvent, useState} from 'react';
+import {TextField} from "@mui/material";
 
 type PropsType = {
     title: string
@@ -27,12 +28,21 @@ const EditableSpan = (props: PropsType) => {
     return (
         edit
             ?
-            <input
+            <TextField
+                id="outlined-basic"
+                variant="standard"
+                value={newTitle}
+                size="small"
+                onBlur={onBlurHandler}
+                onChange={onChangeHandler}
+                autoFocus
+            />
+            /*<input
                 value={newTitle}
                 onBlur={onBlurHandler}
                 autoFocus
                 onChange={onChangeHandler}
-            />
+            />*/
             : <span onDoubleClick={onDoubleClickHandler}>{props.title}</span>
     );
 };

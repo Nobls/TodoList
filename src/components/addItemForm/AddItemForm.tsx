@@ -1,11 +1,11 @@
 import React, {ChangeEvent, KeyboardEvent, useState} from 'react';
-import styles from "../todoList/todoList.module.css";
+import {Button, TextField} from "@mui/material";
 
 type PropsType = {
-    callBack: (title:string)=>void
+    callBack: (title: string) => void
 }
 
-const AddItemForm = (props:PropsType) => {
+const AddItemForm = (props: PropsType) => {
 
     let [title, setTitle] = useState('')
     let [error, setError] = useState(false)
@@ -34,13 +34,22 @@ const AddItemForm = (props:PropsType) => {
 
     return (
         <div>
-            <input value={title}
-                   onChange={onChangeTaskHandler}
-                   onKeyPress={onKeyPressTaskHandler}
-                   className={error ? styles.error : ''}
+            <TextField
+                id="outlined-basic"
+                label={error ? "Title is required" : ''}
+                error={error}
+                variant="outlined"
+                value={title}
+                size="small"
+                onChange={onChangeTaskHandler}
+                onKeyPress={onKeyPressTaskHandler}
+                className={error ? "error" : ""}
+                autoComplete={'off'}
             />
-            <button onClick={addTask}>+</button>
-            {error && <div className={styles.errorMessage}>Title is required</div>}
+            <Button style={{maxWidth: '40px', maxHeight: '40px', minWidth: '40px', minHeight: '40px'}}
+                    variant="contained" onClick={addTask} disabled={error}>
+                +
+            </Button>
         </div>
     );
 };
